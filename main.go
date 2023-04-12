@@ -35,7 +35,7 @@ func main() {
 		if end > total {
 			end = total
 		}
-		go createFile(i, records[start:end], &wg, &mutex)
+		go CreateFile(i, records[start:end], &wg, &mutex)
 		fmt.Println(start, end)
 		fmt.Println("=====================================")
 		time.Sleep(1 * time.Second)
@@ -43,7 +43,7 @@ func main() {
 	wg.Wait()
 }
 
-func createFile(index int, data any, wg *sync.WaitGroup, mut *sync.Mutex) {
+func CreateFile(index int, data any, wg *sync.WaitGroup, mut *sync.Mutex) {
 	defer wg.Done()
 	mut.Lock()
 	fopen, err := os.Create(fmt.Sprintf("files/test-%v.txt", index))
